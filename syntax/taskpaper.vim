@@ -29,8 +29,8 @@ syn match taskpaperListItem  /^\t*-\s\+/
 syn match taskpaperContext   /\s\zs@[^ \t(]\+\(([^)]*)\)\?/
 syn match taskpaperToday     /@today/
 syn match taskpaperUrgent    /@urgent/
-syn match taskpaperDone      /^.*\s@done\(\(\s\|([^)]*)\).*\)\?$/
-syn match taskpaperCancelled /^.*\s@cancelled\(\(\s\|([^)]*)\).*\)\?$/
+syn match taskpaperDone      /^.*\s@done\(\(\s\|([^)]*)\).*\)\?$/ contains=taskpaperToday,taskpaperUrgent
+syn match taskpaperCancelled /^.*\s@cancelled\(\(\s\|([^)]*)\).*\)\?$/ contains=taskpaperToday,taskpaperUrgent
 
 syn sync fromstart
 
