@@ -34,7 +34,7 @@ syn sync fromstart
 
 "highlighting for Taskpaper groups
 HiLink taskpaperListItem      Identifier
-HiLink taskpaperContext       Identifier
+HiLink taskpaperContext       String
 HiLink taskpaperProject       Title
 HiLink taskpaperDone          Comment
 HiLink taskpaperCancelled     Comment
