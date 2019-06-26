@@ -36,8 +36,8 @@ syn sync fromstart
 HiLink taskpaperListItem      Identifier
 HiLink taskpaperContext       Identifier
 HiLink taskpaperProject       Title
-HiLink taskpaperDone          NonText
-HiLink taskpaperCancelled     NonText
+HiLink taskpaperDone          Comment
+HiLink taskpaperCancelled     Comment
 HiLink taskpaperComment       Comment
 
 call taskpaper#tag_style_dict(g:task_paper_styles)
