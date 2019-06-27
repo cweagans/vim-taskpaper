@@ -1,13 +1,6 @@
-taskpaper.txt   For Vim version 6.0     Last change: 2012 March 13
+# vim-taskpaper
 
-David O'Callaghan <david.ocallaghan@cs.tcd.ie>
-
-13th March 2012
-
-Introduction
-=============
-
-*Latest version from https://github.com/davidoc/taskpaper.vim*
+## Introduction
 
 From the TaskPaper website (<http://hogbaysoftware.com/projects/taskpaper>):
 
@@ -25,75 +18,40 @@ want to edit their TaskPaper lists in Vim from time to time (for example, in
 a SSH session, or on a non-Mac system) and for anyone who is looking for a
 simple to-do list format.
 
-Installation
-=============
+## Installation
 
-It should be safe to simply unpack the package into your .vim directory.
-It contains the following files:
+Assuming you're using [vim-plug](https://github.com/junegunn/vim-plug):
 
-    autoload/taskpaper.vim
-    doc/example.taskpaper
-    doc/taskpaper.txt
-    doc/taskpaper_licence.txt
-    ftdetect/taskpaper.vim
-    ftplugin/taskpaper.vim
-    syntax/taskpaper.vim
+```
+Plug 'cweagans/vim-taskpaper'
+```
 
-To access this help file from within Vim you must first update your help 
-tags:
+If you're using the [Vigor](https://github.com/vim-vigor) neovim distribution,
+you can also install the [language-taskpaper](https://github.com/vim-vigor/language-taskpaper)
+layer.
 
-    :helptags ~/.vim/doc
-
-The path may need to be modified depending on where you install to. Once
-you have done this you can access the help with this command:
-
-    :help taskpaper
-
-Syntax
-=======
-
-The syntax file highlights project headings and task contexts (tags), and
-"greys out" completed tasks. The exact style of the displayed file depends
-on your Vim colour scheme.
-
-A project heading is a piece of text ending in a colon.
-
-A task is a line beginning with a hyphen '-' and can have zero or more
-context tags.
-
-A context tag has the form "@tag".
-
-Other text is considered as a "note" and is displayed as a Vim comment.
-
-File-type Plugin
-=================
-
-The file-type plugin tries to make editing TaskPaper files in Vim more
-comfortable.
+## Features
 
 Vim can complete context names after the '@' using the keyword completion
 commands (e.g. Ctrl-X Ctrl-N).
 
 The plugin defines some new mappings:
 
-    \td     Mark task as done
-    \tx     Mark task as cancelled
-    \tt     Mark task as today
-    \tD     Archive @done items
-    \tX     Show tasks marked as cancelled
-    \tT     Show tasks marked as today
-    \t/     Search for items including keyword
-    \ts     Search for items including tag
-    \tp     Fold all projects
-    \t.     Fold all notes
-    \tP     Focus on the current project
-    \tj     Go to next project
-    \tk     Go to previous project
-    \tg     Go to specified project
-    \tm     Move task to specified project
-
-Note: if `<Leader>` has been changed (e.g. `:let mapleader=",,"`)
-then its value should be used instead of `\` in the mappings.
+    <Leader>td     Mark task as done
+    <Leader>tx     Mark task as cancelled
+    <Leader>tt     Mark task as today
+    <Leader>tD     Archive @done items
+    <Leader>tX     Show tasks marked as cancelled
+    <Leader>tT     Show tasks marked as today
+    <Leader>t/     Search for items including keyword
+    <Leader>ts     Search for items including tag
+    <Leader>tp     Fold all projects
+    <Leader>t.     Fold all notes
+    <Leader>tP     Focus on the current project
+    <Leader>tj     Go to next project
+    <Leader>tk     Go to previous project
+    <Leader>tg     Go to specified project
+    <Leader>tm     Move task to specified project
 
 Marking a task as done will add the "@done" context tag to the end of the
 task, and it will be greyed out by the syntax file.
@@ -114,8 +72,7 @@ To go to next or previous project use the `\tj` command or `\tk` command.  To
 go to a project you specify use the `\tg` command.  You can complete project
 names with <Tab> on prompt.
 
-Configuration
-==============
+## Options
 
 The plugin supports a number of configuration variables, which can be set in
 your .vimrc file.
@@ -151,13 +108,6 @@ which is a dictionary.
 'ctermbg=Red guibg=Red'}
 
 See |highlight-args| for a full description of the syntax.
-
-
-File-type Detection
-====================
-
-This package also contains a script to automatically use the TaskPaper file
-type for all files with the ".taskpaper" extension.
 
 Customize
 ==========
@@ -219,84 +169,7 @@ To update a tag (not delete if the tag exists):
     nnoremap <buffer> <silent> <Leader>tq
     \    :<C-u>call taskpaper#update_tag('priority')<CR>
 
-Licence
-========
+## Acknowledgements
 
-Copyright (C) 2007--2012 by David O'Callaghan <david.ocallaghan@cs.tcd.ie>
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-Acknowledgements
-=================
-
-The initial version of the ToggleDone() function was based on SwitchBox()
-from the VimOutliner Checkboxes script written by Noel Henson (available
-from <http://www.vimoutliner.org>).
-
-Context folding expression was based on a snippet from Vim Tip 282
-(<http://vim.sourceforge.net/tips/tip.php?tip_id=282>).
-
-Thanks are due to a number of contributors who have supplied suggestions
-or patches to improve TaskPaper.vim:
-
- * Alexander Wodniok
-   - hint to allow this file to be used as a help file
- * Ben Armstron 
-   - various fixes that make the scripts more robust
-   - fix to show only complete tag matches
-   - include `_` in contexts
- * Huahai Yang 
-   - fixed handling of indented tasks
- * Steve Audette
-   - suggested change to folding
- * Andreas Kühntopf 
-   - display non-tasks as comments
- * Julien Blanchard (https://github.com/julienXX)
-   - added ToggleCancelled
- * Robert James Kaes (https://github.com/rjkaes)
-   - added task_paper_date_format
- * Adriano Castro (https://github.com/adrianocastro)
-   - use tabs not spaces (noexpandtab)
- * Morgan Sutherland (https://github.com/msutherl)
-   - Use <Leader> rather than <LocalLeader>
-   - Start new task after <CR>
- * Matt Sacks (https://github.com/mattsa)
-   - Optional (date) syntax for @done tasks
-   - Add Tag command for add/removing tag
-   - Fix lagging space after removing a tag
-   - Better syntax 
- * Anyakichi (https://github.com/anyakichi)
-   - Add useful functions for users to define his own mappings easily
-    - Add, delete, toggle, and update tags
-    - Go previous or next project
-    - Move projects, tasks and notes to another project
-    - Search for keywords or tags with regexp
-   - More compatible with HogBaySoftware's TaskPaper
-    - Tag to projects and notes not only tasks
-    - Shortcut to @today tag
-    - Archiving done support
-   - Multi-level folding of projects work perfectly
-   - Add a new feature to fold only notes
-
-
-
-Contact
-========
-
-The author of these Vim scripts is David O'Callaghan
-<david.ocallaghan@cs.tcd.ie>.
-
-For all information regarding the TaskPaper application itself please visit
-<http://hogbaysoftware.com/projects/taskpaper/>.
+* The [original plugin](https://github.com/davidoc/taskpaper.vim) was written by David O'Callaghan <david.ocallaghan@cs.tcd.ie>
+* This fork has been improved by contributions from many forks of the original repository
