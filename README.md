@@ -22,7 +22,7 @@ simple to-do list format.
 
 Assuming you're using [vim-plug](https://github.com/junegunn/vim-plug):
 
-```
+```vim
 Plug 'cweagans/vim-taskpaper'
 ```
 
@@ -37,21 +37,23 @@ commands (e.g. Ctrl-X Ctrl-N).
 
 The plugin defines some new mappings:
 
-    <Leader>td     Mark task as done
-    <Leader>tx     Mark task as cancelled
-    <Leader>tt     Mark task as today
-    <Leader>tD     Archive @done items
-    <Leader>tX     Show tasks marked as cancelled
-    <Leader>tT     Show tasks marked as today
-    <Leader>t/     Search for items including keyword
-    <Leader>ts     Search for items including tag
-    <Leader>tp     Fold all projects
-    <Leader>t.     Fold all notes
-    <Leader>tP     Focus on the current project
-    <Leader>tj     Go to next project
-    <Leader>tk     Go to previous project
-    <Leader>tg     Go to specified project
-    <Leader>tm     Move task to specified project
+| Key          | Description                        |
+| ------------ | ---------------------------------- |
+| `<Leader>td` | Mark task as done                  |
+| `<Leader>tx` | Mark task as cancelled             |
+| `<Leader>tt` | Mark task as today                 |
+| `<Leader>tD` | Archive @done items                |
+| `<Leader>tX` | Show tasks marked as cancelled     |
+| `<Leader>tT` | Show tasks marked as today         |
+| `<Leader>t/` | Search for items including keyword |
+| `<Leader>ts` | Search for items including tag     |
+| `<Leader>tp` | Fold all projects                  |
+| `<Leader>t.` | Fold all notes                     |
+| `<Leader>tP` | Focus on the current project       |
+| `<Leader>tj` | Go to next project                 |
+| `<Leader>tk` | Go to previous project             |
+| `<Leader>tg` | Go to specified project            |
+| `<Leader>tm` | Move task to specified project     |
 
 Marking a task as done will add the "@done" context tag to the end of the
 task, and it will be greyed out by the syntax file.
@@ -83,31 +85,41 @@ define the `task_paper_date_format` variable. The format matches your system's
 
 For example, to include the date and time in ISO8601 format:
 
-    let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
+```vim
+let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
+```
 
 To change the default archive project name, define the
 `task_paper_archive_project` variable.  The default value is "Archive".
 
-    let g:task_paper_archive_project = "Archive"
+```vim
+let g:task_paper_archive_project = "Archive"
+```
 
 By default, when you move a task, the cursor will follow that task to its new
 location.  To make the cursor stay in it's current location, change the
 `task_paper_follow_move` variable.
 
-    let g:task_paper_follow_move = 0
+```vim
+let g:task_paper_follow_move = 0
+```
 
 If you want to hide done tasks when searching you can change the
 `task_paper_search_hide_done` variable.
 
-    let g:task_paper_search_hide_done = 1
+```vim
+let g:task_paper_search_hide_done = 1
+```
 
 To set a custom style (colour, bold, etc.) for tags task_paper_styles variable,
 which is a dictionary.
 
-    let g:task_paper_styles={'wait': 'ctermfg=Blue guifg=Blue', 'FAIL':
+```vim
+let g:task_paper_styles={'wait': 'ctermfg=Blue guifg=Blue', 'FAIL':
 'ctermbg=Red guibg=Red'}
+```
 
-See |highlight-args| for a full description of the syntax.
+See `:h highlight-args` for a full description of the syntax.
 
 Customize
 ==========
@@ -116,58 +128,76 @@ You can create your own shortcut for tagging.  To define your own shortcut,
 write settings in ~/.vim/ftplugin/taskpaper.vim or ~/.vimrc.  If you use the
 .vimrc file, define settings like:
 
-    function! s:taskpaper_setup()
-    " Your settings
-    nnoremap <buffer> <silent> <Leader>tn
-    \    :<C-u>call taskpaper#toggle_tag('next', '')<CR>
-    endfunction
+```vim
+function! s:taskpaper_setup()
+" Your settings
+nnoremap <buffer> <silent> <Leader>tn
+\    :<C-u>call taskpaper#toggle_tag('next', '')<CR>
+endfunction
 
-    augroup vimrc-taskpaper
-    autocmd!
-    autocmd FileType taskpaper call s:taskpaper_setup()
-    augroup END
+augroup vimrc-taskpaper
+autocmd!
+autocmd FileType taskpaper call s:taskpaper_setup()
+augroup END
+```
 
 To add a tag without argument:
 
-    nnoremap <buffer> <silent> <Leader>tn
-    \    :<C-u>call taskpaper#add_tag('next', '')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tn
+\    :<C-u>call taskpaper#add_tag('next', '')<CR>
+```
 
 To delete a tag:
 
-    nnoremap <buffer> <silent> <Leader>tN
-    \    :<C-u>call taskpaper#delete_tag('next', '')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tN
+\    :<C-u>call taskpaper#delete_tag('next', '')<CR>
+```
 
 To toggle a tag:
 
-    nnoremap <buffer> <silent> <Leader>tn
-    \    :<C-u>call taskpaper#toggle_tag('next', '')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tn
+\    :<C-u>call taskpaper#toggle_tag('next', '')<CR>
+```
 
 To add a tag with an argument:
 
-    nnoremap <buffer> <silent> <Leader>tq
-    \    :<C-u>call taskpaper#add_tag('priority')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tq
+\    :<C-u>call taskpaper#add_tag('priority')<CR>
+```
 
 You can specify the priority value on prompt.
 
 To delete the priority tag with any argument:
 
-    nnoremap <buffer> <silent> <Leader>tQ
-    \    :<C-u>call taskpaper#delete_tag('priority', '')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tQ
+\    :<C-u>call taskpaper#delete_tag('priority', '')<CR>
+```
 
 To delete only the level 1 of priority tag:
 
-    nnoremap <buffer> <silent> <Leader>tQ
-    \    :<C-u>call taskpaper#delete_tag('priority', '1')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tQ
+\    :<C-u>call taskpaper#delete_tag('priority', '1')<CR>
+```
 
 To toggle a tag with an argument:
 
-    nnoremap <buffer> <silent> <Leader>tq
-    \    :<C-u>call taskpaper#toggle_tag('priority')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tq
+\    :<C-u>call taskpaper#toggle_tag('priority')<CR>
+```
 
 To update a tag (not delete if the tag exists):
 
-    nnoremap <buffer> <silent> <Leader>tq
-    \    :<C-u>call taskpaper#update_tag('priority')<CR>
+```vim
+nnoremap <buffer> <silent> <Leader>tq
+\    :<C-u>call taskpaper#update_tag('priority')<CR>
+```
 
 ## Acknowledgements
 
