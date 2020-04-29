@@ -74,11 +74,11 @@ if !exists("no_plugin_maps") && !exists("no_taskpaper_maps")
     nnoremap <silent> <buffer> <Plug>TaskPaperShowCancelled
     \       :<C-u>call taskpaper#search_tag('cancelled')<CR>
     nnoremap <silent> <buffer> <Plug>TaskPaperToggleCancelled
-    \       :call taskpaper#toggle_tag('cancelled', taskpaper#date())<CR>
+    \       :call taskpaper#toggle_tag('cancelled', taskpaper#date())<CR>:silent! call repeat#set("\<Plug>TaskPaperToggleCancelled", v:count)<CR>
     nnoremap <silent> <buffer> <Plug>TaskPaperToggleDone
-    \       :call taskpaper#toggle_tag('done', taskpaper#date())<CR>
+    \       :call taskpaper#toggle_tag('done', taskpaper#date())<CR>:silent! call repeat#set("\<Plug>TaskPaperToggleDone", v:count)<CR>
     nnoremap <silent> <buffer> <Plug>TaskPaperToggleToday
-    \       :call taskpaper#toggle_tag('today', '')<CR>
+    \       :call taskpaper#toggle_tag('today', '')<CR>:silent! call repeat#set("\<Plug>TaskPaperToggleToday", v:count)<CR>
     nnoremap <silent> <buffer> <Plug>TaskPaperMoveToProject
     \       :call taskpaper#move_to_project()<CR>
 
